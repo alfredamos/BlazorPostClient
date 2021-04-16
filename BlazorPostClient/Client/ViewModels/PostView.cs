@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace BlazorPostClient.Shared.Models
+namespace BlazorPostClient.Client.ViewModels
 {
-    public class Post
+    public class PostView
     {
         public int PostID { get; set; }
         public string Title { get; set; }
         public string Content { get; set; }
-
-        [ForeignKey("Author")]
+       
         public int AuthorID { get; set; }
-        public Author Author { get; set; }
+        public AuthorView Author { get; set; }
         public DateTime DatePosted { get; set; } = DateTime.Now;
     }
 }

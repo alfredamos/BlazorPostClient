@@ -1,5 +1,9 @@
+using BlazorPostClient.Client.Contracts;
+using BlazorPostClient.Client.Mapings;
+using BlazorPostClient.Client.Services;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -25,6 +29,18 @@ namespace BlazorPostClient.Client
             builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("BlazorPostClient.ServerAPI"));
 
             builder.Services.AddApiAuthorization();
+
+            builder.Services.AddScoped<IAuthorService, AuthorService>();
+            builder.Services.AddScoped<IPostService, PostService>();
+
+            builder.Services.AddAutoMapper(typeof(Map));
+
+            builder.Services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+                options.AppendTrailingSlash = true;
+            });
 
             await builder.Build().RunAsync();
         }

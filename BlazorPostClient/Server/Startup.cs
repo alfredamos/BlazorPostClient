@@ -1,10 +1,15 @@
+using BlazorPostClient.Server.Contracts;
 using BlazorPostClient.Server.Data;
+using BlazorPostClient.Server.Helpers;
+using BlazorPostClient.Server.Mappings;
 using BlazorPostClient.Server.Models;
+using BlazorPostClient.Server.SQL;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +31,12 @@ namespace BlazorPostClient.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(Policy => Policy.AddPolicy("CorsPolicy", builder =>
+                 builder.AllowAnyOrigin()
+                 .AllowAnyHeader()
+                 .AllowAnyMethod()
+             ));
+
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
@@ -41,8 +52,29 @@ namespace BlazorPostClient.Server
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
             services.AddRazorPages();
+
+            services.AddScoped<IAuthorRepository, SQLAuthorRepository>();
+            services.AddScoped<IPostRepository, SQLPostRepository>();
+
+            services.AddScoped<IFileStorageService, InAppStorageService>();
+
+            services.AddHttpContextAccessor();
+
+
+            services.AddAutoMapper(typeof(Mapp));
+
+            services.Configure<RouteOptions>(options =>
+            {
+                options.LowercaseUrls = true;
+                options.LowercaseQueryStrings = true;
+                options.AppendTrailingSlash = true;
+            });
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -60,6 +92,8 @@ namespace BlazorPostClient.Server
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
+            app.UseCors("CorsPolicy");
 
             app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();

@@ -4,14 +4,16 @@ using BlazorPostClient.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BlazorPostClient.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210415210916_AddAuthorsAndPostsTablesToDB")]
+    partial class AddAuthorsAndPostsTablesToDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,7 +123,7 @@ namespace BlazorPostClient.Server.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("AuthorID")
+                    b.Property<int?>("AuthorID")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -382,9 +384,7 @@ namespace BlazorPostClient.Server.Data.Migrations
                 {
                     b.HasOne("BlazorPostClient.Shared.Models.Author", "Author")
                         .WithMany()
-                        .HasForeignKey("AuthorID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("AuthorID");
 
                     b.Navigation("Author");
                 });

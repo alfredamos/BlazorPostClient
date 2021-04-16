@@ -1,0 +1,47 @@
+﻿
+
+<div class="border" style="width: 30%">
+    <div class="card-header text-center">
+        <h3>Author Detail</h3>
+    </div>
+    <div class="card-body">
+        <table>
+            <tbody>
+                <tr>
+                    <td><strong>Full Name : </strong>@Author.FullName</td>
+                </tr>
+                <tr>
+                    <td><strong>Email Add : </strong>@Author.Email</td>
+                </tr>
+                <tr>
+                    <td><strong>Phone Numb : </strong>@Author.PhoneNumber</td>
+                </tr>
+                <tr>
+                    <td><strong>Birth Date : </strong>@Author.DateOfBirth</td>
+                </tr>                
+            </tbody>
+        </table>
+    </div>
+    <div class="card-footer">
+        <button type="button" class="btn btn-outline-danger btn-block" @onclick="DeleteClick" style="font-weight: bold">
+            Delete
+        </button>
+        <button type="button" class="btn btn-outline-primary btn-block" @onclick="BackToList" style="font-weight: bold">
+            Back to List
+        </button>
+    </div>
+</div>
+
+
+@code {
+    [Parameter]
+    public AuthorView Author { get; set; } = new AuthorView();
+
+    [Parameter]
+    public EventCallback DeleteClick { get; set; }
+
+    [Parameter]
+    public EventCallback BackToList { get; set; }
+
+
+}
