@@ -142,7 +142,7 @@ namespace BlazorPostClient.Server.Controllers.Posts
         }
 
         // GET: api/Posts/search/searchKey
-        [HttpGet("{searchKey}")]
+        [HttpGet("search/{searchKey}")]
         public async Task<ActionResult<IEnumerable<Post>>> Search(string searchKey)
         {
             try

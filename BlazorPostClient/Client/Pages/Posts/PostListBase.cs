@@ -8,12 +8,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BlazorPostClient.Client.Pages.Authors
+namespace BlazorPostClient.Client.Pages.Posts
 {
-    public class AuthorListBase : ComponentBase
+    public class PostListBase : ComponentBase
     {
         [Inject]
-        public IAuthorService AuthorService { get; set; }
+        public IPostService PostService { get; set; }
 
         [Inject]
         public NavigationManager NavigationManager { get; set; }
@@ -21,15 +21,15 @@ namespace BlazorPostClient.Client.Pages.Authors
         [Inject]
         public IMapper Mapper { get; set; }
 
-        public List<AuthorView> Authors { get; set; } = new List<AuthorView>();
+        public List<PostView> Posts { get; set; } = new();
 
-        public List<Author> AuthorsDB { get; set; } = new List<Author>();
+        public List<Post> PostsDB { get; set; } = new();
 
         protected async override Task OnInitializedAsync()
         {
-            AuthorsDB = (await AuthorService.GetAll()).ToList();
+            PostsDB = (await PostService.GetAll()).ToList();
 
-            Mapper.Map(AuthorsDB, Authors);
+            Mapper.Map(PostsDB, Posts);
         }
 
     }

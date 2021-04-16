@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPostClient.Server", "BlazorPostClient\Server\BlazorPostClient.Server.csproj", "{89597484-2FDA-44F8-991C-55389B66F3AC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPostClient.Server", "BlazorPostClient\Server\BlazorPostClient.Server.csproj", "{89597484-2FDA-44F8-991C-55389B66F3AC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPostClient.Client", "BlazorPostClient\Client\BlazorPostClient.Client.csproj", "{2298B7E3-B79A-43CB-9ADB-5D1F62F215B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPostClient.Client", "BlazorPostClient\Client\BlazorPostClient.Client.csproj", "{2298B7E3-B79A-43CB-9ADB-5D1F62F215B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BlazorPostClient.Shared", "BlazorPostClient\Shared\BlazorPostClient.Shared.csproj", "{92FCBD1C-AA7B-4C49-A089-44C31E0050F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BlazorPostClient.Shared", "BlazorPostClient\Shared\BlazorPostClient.Shared.csproj", "{92FCBD1C-AA7B-4C49-A089-44C31E0050F7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

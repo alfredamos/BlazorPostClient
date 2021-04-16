@@ -1,0 +1,45 @@
+﻿
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <article class="media content-section" style="width:60%">
+                <img class="rounded-circle article-img" src="@PostAuthorPhoto">
+                <div class="media-body">
+                    <div class="article-metadata">
+                        <a class="mr-2" href="@($"/userPosts/{PostAuthorID}")">@PostAuthorName</a>
+                        <small class="text-muted">@Post.DatePosted.ToLongDateString()</small>
+                        <div>
+                            <a class="btn btn-outline-secondary btn-sm mt-1 mb-1" href="@($"/editPost/{Post.PostID}")"><strong>Update</strong></a>
+                            <button type="button" class="btn btn-outline-danger btn-sm mt-1 mb-1" @onclick="DeleteClick"><strong>Delete</strong></button>
+                        </div>
+                    </div>
+                    <h2 class="article-title"><a style="text-decoration: none" href="/postList">@Post.Title</a></h2>
+                    <hr />
+                    <p class="article-content">@Post.Content</p>
+                </div>
+            </article>
+        </div>
+    </div>    
+</main>
+
+
+@code {
+    [Parameter]
+    public PostView Post { get; set; }
+
+    [Parameter]
+    public EventCallback DeleteClick { get; set; }
+
+    [Parameter]
+    public EventCallback BackToList { get; set; }
+
+    [Parameter]
+    public string PostAuthorName { get; set; }
+
+    [Parameter]
+    public string PostAuthorPhoto { get; set; }
+
+    [Parameter]
+    public int PostAuthorID { get; set; }
+}

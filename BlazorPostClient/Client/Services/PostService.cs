@@ -40,7 +40,7 @@ namespace BlazorPostClient.Client.Services
 
         public async Task<IEnumerable<Post>> Search(string searchKey)
         {
-            return await _httpClient.GetJsonAsync<Post[]>($"{_baseUrl}/search/{searchKey}");
+            return await _httpClient.GetJsonAsync<Post[]>($"{ _baseUrl}/search/{searchKey}");
         }
 
         public async Task<Post> UpdateEntity(Post updatedService)

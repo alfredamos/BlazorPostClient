@@ -18,7 +18,7 @@ namespace BlazorPostClient.Server.SQL
             _context = context;
         }
         public async Task<Author> AddEntity(Author newEntity)
-        {
+        {      
             var author = await _context.Authors.AddAsync(newEntity);
             await _context.SaveChangesAsync();
 
@@ -63,7 +63,7 @@ namespace BlazorPostClient.Server.SQL
         }
 
         public async Task<Author> UpdateEntity(Author updatedEntity)
-        {
+        {           
             var author = _context.Authors.Attach(updatedEntity);
             author.State = EntityState.Modified;
             await _context.SaveChangesAsync();

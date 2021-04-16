@@ -1,0 +1,9 @@
+﻿@page "/postDetail/{Id:int}"
+@inherits PostDetailBase
+
+
+<PostInfo Post="Post" PostAuthorName="@($"{PostAuthorName}")" PostAuthorPhoto="@($"{PostAuthorPhoto}")"
+          PostAuthorID="PostAuthorID" DeleteClick="DeleteClick" BackToList="Cancel"/>
+
+<ConfirmDelete @ref="DeleteConfirmation" ConfirmationChanged="DeletePost" ConfirmationMessage="@($"Are you sure you want to delete {Post.Title} ?")"
+                   ConfirmationTitle="Post Delete Confirmation" />

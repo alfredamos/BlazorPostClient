@@ -50,18 +50,18 @@ namespace BlazorPostClient.Server.SQL
 
         public async Task<IEnumerable<Post>> Search(string searchKey)
         {
-            IQueryable<Post> query = _context.Posts.Include(a => a.Author);
+            IQueryable<Post> query = _context.Posts.Include(p => p.Author);
             if (string.IsNullOrWhiteSpace(searchKey))
             {
                 return await query.ToListAsync();
             }
 
             return await query.Where(a => a.Title.Contains(searchKey) ||
-                              a.Content.Contains(searchKey) ||
+                              a.Content.Contains(searchKey) ||                              
                               a.Author.FirstName.Contains(searchKey) ||
                               a.Author.FullName.Contains(searchKey) ||
                               a.Author.LastName.Contains(searchKey) ||
-                              a.Author.Email.Contains(searchKey) ||
+                              a.Author.Email.Contains(searchKey) || 
                               a.Author.PhoneNumber.Contains(searchKey)).ToListAsync();
         }
 

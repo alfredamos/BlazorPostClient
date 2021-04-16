@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace BlazorPostClient.Server.Data.Migrations
+namespace BlazorPostClient.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210415210916_AddAuthorsAndPostsTablesToDB")]
-    partial class AddAuthorsAndPostsTablesToDB
+    [Migration("20210416192926_AddAuthorAndPostTablesToDB")]
+    partial class AddAuthorAndPostTablesToDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -111,6 +111,9 @@ namespace BlazorPostClient.Server.Data.Migrations
                     b.Property<string>("PhotoPath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Slug")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("AuthorID");
 
                     b.ToTable("Authors");
@@ -123,7 +126,7 @@ namespace BlazorPostClient.Server.Data.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("AuthorID")
+                    b.Property<int>("AuthorID")
                         .HasColumnType("int");
 
                     b.Property<string>("Content")
@@ -384,7 +387,9 @@ namespace BlazorPostClient.Server.Data.Migrations
                 {
                     b.HasOne("BlazorPostClient.Shared.Models.Author", "Author")
                         .WithMany()
-                        .HasForeignKey("AuthorID");
+                        .HasForeignKey("AuthorID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Author");
                 });

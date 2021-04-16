@@ -9,8 +9,12 @@ namespace BlazorPostClient.Client.ViewModels
     {
         public int AuthorID { get; set; }
         public string FirstName { get; set; }
-        public string LastName { get; set; }
-       
+        public string LastName { get; set; }      
+        public string Email { get; set; }
+        public string PhoneNumber { get; set; }
+        public string PhotoPath { get; set; }     
+        public DateTime DateOfBirth { get; set; }
+
         public string FullName
         {
             get
@@ -18,9 +22,6 @@ namespace BlazorPostClient.Client.ViewModels
                 return $"{FirstName} {LastName}";
             }
         }
-        public string Email { get; set; }
-        public string PhoneNumber { get; set; }
-        public string PhotoPath { get; set; }
-        public DateTime DateOfBirth { get; set; }
+
     }
 }

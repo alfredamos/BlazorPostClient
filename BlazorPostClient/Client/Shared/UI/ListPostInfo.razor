@@ -1,0 +1,44 @@
+﻿
+
+<main role="main" class="container">
+    <div class="row">
+        <div class="col-md-8">
+
+            @foreach (var post in Posts)
+            {
+                @if (Posts[Posts.FindIndex(p => p.Equals(post))] == Posts[0])
+                {
+                    @if (IsList)
+                    {
+                        <h1 class="mb-3">Posts by @post.Author.FullName @Posts.Count</h1>
+                    }
+                }
+                <article class="media content-section" style="width:60%">
+                    <img class="rounded-circle article-img" src="@post.Author.PhotoPath">
+                    <div class="media-body">
+                        <div class="article-metadata">
+                            <a class="mr-2" href="@(@IsList ? "/postList" : $"/userPosts/{post.Author.AuthorID}" )">@post.Author.FullName</a>
+                            <small class="text-muted">@post.DatePosted.ToLongDateString()</small>
+                            <div>
+                                <a class="btn btn-outline-secondary btn-sm mt-1 mb-1" href="@($"/editPost/{post.PostID}")"><strong>Update</strong></a>
+                                <a type="button" class="btn btn-outline-danger btn-sm mt-1 mb-1" href="@($"/deletePost/{post.PostID}")"><strong>Delete</strong></a>
+                            </div>
+                        </div>
+                        <h2><a href="@($"/postDetail/{post.PostID}")" style="text-decoration: none">@post.Title</a></h2>
+                        <hr />
+                        <p class="article-content">@post.Content</p>
+                    </div>
+                </article>
+            }
+        </div>
+    </div>
+</main>
+
+@code {
+    [Parameter]
+    public List<PostView> Posts { get; set; } = new();
+
+    [Parameter]
+    public bool IsList { get; set; } = false;
+
+}

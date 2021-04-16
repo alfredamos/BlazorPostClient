@@ -7,11 +7,11 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace BlazorPostClient.Server.Data.Migrations
+namespace BlazorPostClient.Server.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210415211231_AddAuthorsAndPostsTableswithForeignKeyToDB")]
-    partial class AddAuthorsAndPostsTableswithForeignKeyToDB
+    [Migration("20210416202651_RemoveSlugColumnFromAuthurTableDB")]
+    partial class RemoveSlugColumnFromAuthurTableDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

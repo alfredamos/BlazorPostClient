@@ -1,0 +1,5 @@
+﻿@page "/editPost/{Id:int}"
+@inherits EditPostBase
+
+<PostForm Authors="Authors" Post="Post" UpsertPost="UpdatePost" CancelMethod="Cancel"
+          UpsertButton="Save" CancelButton="Cancel" />
