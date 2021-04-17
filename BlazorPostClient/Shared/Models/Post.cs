@@ -17,5 +17,13 @@ namespace BlazorPostClient.Shared.Models
         public int AuthorID { get; set; }
         public Author Author { get; set; }
         public DateTime DatePosted { get; set; } = DateTime.Now;
+        [NotMapped]
+        public string TruncatedContent 
+        { 
+            get
+            {
+                return $"{Content.Truncate(80)}{"...."}";
+            } 
+        }
     }
 }
